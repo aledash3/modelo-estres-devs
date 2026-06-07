@@ -311,5 +311,3 @@ Quito, Ecuador
 
 Este proyecto fue desarrollado con fines académicos y educativos dentro de la Universidad Politécnica Salesiana.
 Todos los derechos pertenecen a sus respectivos autores.
-
-```
