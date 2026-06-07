@@ -226,38 +226,12 @@ Los resultados indican que el modelo es estable y no se encuentra afectado por o
 
 ---
 
-# 📂 Estructura del Proyecto
-
-```text
-modelo-estres-desarrolladores/
-│
-├── AI_Developer_Performance_Extended_1000.csv
-│
-├── script_modelo.R
-│
-├── informe_final.tex
-│
-├── informe_final.pdf
-│
-├── figuras/
-│   ├── matriz_correlacion.png
-│   ├── dispersion_cognitive_load.png
-│   ├── residuales.png
-│   ├── leverage.png
-│   └── cook_distance.png
-│
-└── README.md
-```
-
----
-
 # ⚙️ Requisitos
 
 ## Software
 
 * R 4.0 o superior
 * RStudio
-* LaTeX (TeX Live o MiKTeX)
 
 ## Librerías de R
 
@@ -280,7 +254,7 @@ git clone https://github.com/usuario/repositorio.git
 Abrir el archivo:
 
 ```text
-script_modelo.R
+modelo_estres_devs.R
 ```
 
 ## 3. Ejecutar el script
