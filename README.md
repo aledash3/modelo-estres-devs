@@ -246,7 +246,7 @@ install.packages("corrplot")
 ## 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/usuario/repositorio.git
+git clone https://github.com/akedasg3/modelo-estres-devs.git
 ```
 
 ## 2. Abrir RStudio
@@ -312,5 +312,4 @@ Quito, Ecuador
 Este proyecto fue desarrollado con fines académicos y educativos dentro de la Universidad Politécnica Salesiana.
 Todos los derechos pertenecen a sus respectivos autores.
 
-```
 ```
