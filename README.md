@@ -301,8 +301,11 @@ Universidad Politécnica Salesiana
 * Mario Alexander Salazar Sema
 
 Carrera de Ciencias de la Computación
+
 Facultad de Ingeniería
+
 Universidad Politécnica Salesiana
+
 Quito, Ecuador
 
 ---
