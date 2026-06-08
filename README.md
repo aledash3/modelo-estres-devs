@@ -294,7 +294,7 @@ Universidad Politécnica Salesiana
 # 👨‍💻 Autores
 
 * David Alejandro Cruz Palacios
-* Elvis Paúl García Acevedo * NO ENVIA CORREO
+* Elvis Paúl García Acevedo 
 * Naim Andre Michelena Andrade * NO ENVIA CORREO
 * Emily Mabel Ortega Constante * PENDIENTE ACEPTAR
 * Carlos José Pilatuña Roldan * PENDIENTE ACEPTAR
