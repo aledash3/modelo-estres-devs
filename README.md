@@ -296,7 +296,7 @@ Universidad Politécnica Salesiana
 * David Alejandro Cruz Palacios
 * Elvis Paúl García Acevedo 
 * Naim Andre Michelena Andrade * NO ENVIA CORREO
-* Emily Mabel Ortega Constante * PENDIENTE ACEPTAR
+* Emily Mabel Ortega Constante 
 * Carlos José Pilatuña Roldan 
 * Mario Alexander Salazar Sema * NO ENVIA CORREO
 
