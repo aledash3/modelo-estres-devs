@@ -7,7 +7,7 @@ library(corrplot)
 # Cargar dataset
 
 data <- read.csv(
-  "AI_Developer_Performance_Extended_1000.csv"
+  "AI_Developer_Performance_Extended_1000.csv" # Modicar ruta según sea necesario
 )
 
 # Eliminar valores faltantes
@@ -236,9 +236,17 @@ repeat{
 rs <- rstandard(
   mejor_modelo
 )
-
+rstu <- rstudent(
+  mejor_modelo
+)
 outliers <- which(
   abs(rs) > 2
+)
+
+df=n-p-1
+qt<- qt(0.05/2,df,lower.tail = FALSE)
+outliers_rstu <- which(
+  abs(rstu) > qt
 )
 
 # Consultar
@@ -351,3 +359,34 @@ summary(modelo_final)
 pred <- predict(modelo_final, newdata=test)
 
 cor(pred, test$Stress_Level)^2
+
+# Validación sobre datos de prueba (20%)
+
+predicciones <- predict(modelo_final, newdata = test)
+
+SS_res <- sum((test$Stress_Level - predicciones)^2)
+SS_tot <- sum((test$Stress_Level - mean(test$Stress_Level))^2)
+
+r2_test <- 1 - (SS_res / SS_tot)
+
+# SALIDA
+r2_test
+
+# -- BLOQUE 16 --
+# Gráficos de supuestos del modelo
+
+par(mfrow = c(2, 2))
+
+# 1. Residuos vs Valores Ajustados (Homocedasticidad)
+plot(
+  modelo_final,
+  which = 1,
+  main = "Residuos vs Valores Ajustados"
+)
+
+# 2. QQ-Plot (Normalidad de errores)
+plot(
+  modelo_final,
+  which = 2,
+  main = "QQ-Plot de Residuales"
+)
