@@ -297,7 +297,7 @@ Universidad Politécnica Salesiana
 * Elvis Paúl García Acevedo 
 * Naim Andre Michelena Andrade * NO ENVIA CORREO
 * Emily Mabel Ortega Constante * PENDIENTE ACEPTAR
-* Carlos José Pilatuña Roldan * PENDIENTE ACEPTAR
+* Carlos José Pilatuña Roldan 
 * Mario Alexander Salazar Sema * NO ENVIA CORREO
 
 Carrera de Ciencias de la Computación
