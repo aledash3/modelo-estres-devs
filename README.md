@@ -296,8 +296,8 @@ Universidad Politécnica Salesiana
 * David Alejandro Cruz Palacios
 * Elvis Paúl García Acevedo * NO ENVIA CORREO
 * Naim Andre Michelena Andrade * NO ENVIA CORREO
-* Emily Mabel Ortega Constante * NO ENVIA CORREO
-* Carlos José Pilatuña Roldan * NO ENVIA CORREO
+* Emily Mabel Ortega Constante * PENDIENTE ACEPTAR
+* Carlos José Pilatuña Roldan * PENDIENTE ACEPTAR
 * Mario Alexander Salazar Sema * NO ENVIA CORREO
 
 Carrera de Ciencias de la Computación
