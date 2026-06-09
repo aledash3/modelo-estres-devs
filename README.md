@@ -295,7 +295,7 @@ Universidad Politécnica Salesiana
 
 * David Alejandro Cruz Palacios
 * Elvis Paúl García Acevedo 
-* Naim Andre Michelena Andrade * NO ENVIA CORREO
+* Naim Andre Michelena Andrade
 * Emily Mabel Ortega Constante 
 * Carlos José Pilatuña Roldan 
 * Mario Alexander Salazar Serna
