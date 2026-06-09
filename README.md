@@ -298,7 +298,7 @@ Universidad Politécnica Salesiana
 * Naim Andre Michelena Andrade * NO ENVIA CORREO
 * Emily Mabel Ortega Constante 
 * Carlos José Pilatuña Roldan 
-* Mario Alexander Salazar Sema * NO ENVIA CORREO
+* Mario Alexander Salazar Serna
 
 Carrera de Ciencias de la Computación
 
