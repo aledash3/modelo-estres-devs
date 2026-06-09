@@ -13,6 +13,7 @@
 \usepackage{url}
 \usepackage{cite}
 \usepackage{array}
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
 
 \begin{document}
 
@@ -39,7 +40,12 @@ Quito, Ecuador\\
 \maketitle
 
 \begin{abstract}
-El análisis de factores que influyen en el nivel de estrés de los desarrolladores de software constituye una temática relevante debido a su impacto directo sobre la productividad, la calidad del código y el bienestar laboral general. El presente estudio propone un modelo estadístico de regresión lineal múltiple para explicar el comportamiento del nivel de estrés utilizando métricas asociadas a productividad, desempeño y carga cognitiva. Para ello se empleó un conjunto de datos compuesto por 1000 observaciones y 12 variables predictoras relacionadas con horas de programación, líneas de código producidas, errores detectados, uso de herramientas de inteligencia artificial, duración de tareas y carga cognitiva, entre otras. Se aplicó un riguroso proceso de limpieza de datos, análisis exploratorio, estudio de correlaciones y detección de multicolinealidad. Posteriormente, se construyó el modelo utilizando un procedimiento algorítmico de selección de variables por eliminación hacia atrás (Backward Elimination) con el objetivo de asegurar la parsimonia y respetar las restricciones dimensionales establecidas para el estudio. Adicionalmente, se realizó una exhaustiva comprobación de suposiciones del modelo (normalidad, homocedasticidad y linealidad) y se evaluaron observaciones atípicas e influyentes mediante el análisis de residuales estandarizados, valores de apalancamiento (leverage) y la Distancia de Cook. El modelo final identificó cuatro variables explicativas principales y alcanzó un coeficiente de determinación ajustado de 0.9410. La validación sobre un subconjunto de datos de prueba no utilizados durante el entrenamiento obtuvo un coeficiente de determinación de 0.9270, evidenciando una sólida capacidad de generalización. Los resultados concluyen que la carga cognitiva constituye el predictor más importante del nivel de estrés, mientras que una mayor tasa de éxito en las tareas contribuye a mitigar dicho fenómeno.
+El análisis de los factores que influyen en el nivel de estrés de los desarrolladores de software es relevante debido a su impacto en la productividad, la calidad del código y el bienestar laboral. Este estudio propone un modelo de regresión lineal múltiple para explicar el comportamiento del nivel de estrés utilizando métricas de productividad, desempeño y carga cognitiva. Para ello se empleó un conjunto de datos compuesto por 1000 observaciones y 12 variables predictoras relacionadas con horas de programación, líneas de código producidas, errores detectados, uso de herramientas de inteligencia artificial, duración de tareas y carga cognitiva, entre otras.
+
+Se realizó un proceso de limpieza de datos, análisis exploratorio, estudio de correlaciones y detección de multicolinealidad. Posteriormente, se construyó un modelo mediante un procedimiento de selección de variables por eliminación hacia atrás (Backward Elimination), con el fin de obtener una solución parsimoniosa. Además, se verificaron las principales suposiciones de la regresión lineal y se identificaron observaciones atípicas e influyentes mediante residuales estandarizados, valores de apalancamiento y distancia de Cook.
+
+El modelo final seleccionó cuatro variables explicativas y alcanzó un coeficiente de determinación ajustado de 0.9410. La validación sobre un conjunto de prueba obtuvo un coeficiente de determinación de 0.9270, evidenciando una adecuada capacidad de generalización. Los resultados indican que la carga cognitiva es el predictor más importante del nivel de estrés, mientras que una mayor tasa de éxito en las tareas contribuye a reducirlo.
+
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -231,6 +237,20 @@ R^2_{test} = 0.9270
 
 Esta leve caída frente al rendimiento de entrenamiento (apenas del $1.4\%$) confirma la ausencia total de sobreajuste (\textit{overfitting}).
 
+Adicionalmente, la diferencia observada entre el desempeño
+sobre el conjunto de entrenamiento ($R^2=0.9413$) y el
+conjunto de prueba ($R^2=0.9270$) fue mínima. Esta
+estabilidad constituye evidencia empírica de que el modelo
+captura relaciones estructurales reales presentes en los datos
+y no únicamente patrones específicos de la muestra de
+entrenamiento.
+
+Desde una perspectiva de aprendizaje estadístico, la baja
+degradación del rendimiento predictivo sugiere que el proceso
+de selección de variables logró un equilibrio adecuado entre
+capacidad explicativa y complejidad del modelo, reduciendo el
+riesgo de sobreajuste y favoreciendo la generalización hacia
+nuevas observaciones.
 \section{Limitaciones y Trabajos Futuros}
 
 A pesar del elevado coeficiente de determinación ajustado
@@ -314,6 +334,20 @@ permiten modelar relaciones no lineales, detectar interacciones
 complejas entre variables y mejorar potencialmente la precisión
 predictiva del sistema.
 
+\section{Discusión}
+
+Los resultados obtenidos evidencian que la regresión lineal
+múltiple constituye una herramienta eficaz para modelar el
+nivel de estrés en desarrolladores de software. La Carga
+Cognitiva se identificó como el predictor más influyente,
+mientras que la Tasa de Éxito en las Tareas mostró una
+relación inversa con el estrés. Además, el procedimiento de
+\textit{Backward Elimination} permitió reducir el modelo de
+doce a cuatro variables sin afectar significativamente su
+capacidad explicativa. Finalmente, la validación externa
+confirmó una adecuada capacidad de generalización y una baja
+probabilidad de sobreajuste.
+
 \section{Conclusiones}
 
 El presente estudio culminó exitosamente en la construcción de un modelo de regresión lineal múltiple capaz de mapear con gran certidumbre matemática el nivel de estrés de los desarrolladores de software, logrando explicar más del 94\% de la variabilidad subyacente. 
@@ -383,6 +417,6 @@ Se invita a la comunidad académica y a los revisores del presente trabajo a con
 \url{https://github.com/aledash3/modelo-estres-devs}
 \end{center}
 
-La documentación técnica del repositorio incluye un archivo \texttt{README.md} con las instrucciones de ejecución y las dependencias de librerías necesarias (como \texttt{corrplot}) para replicar exactamente los mismos coeficientes de regresión reportados en la sección de Resultados.
+La documentación técnica del repositorio incluye un archivo \texttt{README.md} con las instrucciones de ejecución y las dependencias de librerías necesarias para replicar exactamente los mismos coeficientes de regresión reportados en la sección de Resultados.
 
 \end{document}
