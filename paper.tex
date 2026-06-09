@@ -1,0 +1,388 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{url}
+\usepackage{cite}
+\usepackage{array}
+
+\begin{document}
+
+\title{Modelado Estadístico del Nivel de Estrés en Desarrolladores de Software a partir de Métricas de Productividad y Carga Cognitiva}
+
+\author{
+\IEEEauthorblockN{
+David Alejandro Cruz Palacios,
+Elvis Paúl García Acevedo,
+Naim Andre Michelena Andrade,\\
+Emily Mabel Ortega Constante,
+Carlos José Pilatuña Roldan,
+Mario Alexander Salazar Sema
+}
+\IEEEauthorblockA{
+Carrera de Ciencias de la Computación\\
+Facultad de Ingeniería\\
+Universidad Politécnica Salesiana\\
+Quito, Ecuador\\
+\{dcruzp5, egarciaa5, nmichelena, eortegac9, cpilatunar, msalazars2\}@est.ups.edu.ec
+}
+}
+
+\maketitle
+
+\begin{abstract}
+El análisis de factores que influyen en el nivel de estrés de los desarrolladores de software constituye una temática relevante debido a su impacto directo sobre la productividad, la calidad del código y el bienestar laboral general. El presente estudio propone un modelo estadístico de regresión lineal múltiple para explicar el comportamiento del nivel de estrés utilizando métricas asociadas a productividad, desempeño y carga cognitiva. Para ello se empleó un conjunto de datos compuesto por 1000 observaciones y 12 variables predictoras relacionadas con horas de programación, líneas de código producidas, errores detectados, uso de herramientas de inteligencia artificial, duración de tareas y carga cognitiva, entre otras. Se aplicó un riguroso proceso de limpieza de datos, análisis exploratorio, estudio de correlaciones y detección de multicolinealidad. Posteriormente, se construyó el modelo utilizando un procedimiento algorítmico de selección de variables por eliminación hacia atrás (Backward Elimination) con el objetivo de asegurar la parsimonia y respetar las restricciones dimensionales establecidas para el estudio. Adicionalmente, se realizó una exhaustiva comprobación de suposiciones del modelo (normalidad, homocedasticidad y linealidad) y se evaluaron observaciones atípicas e influyentes mediante el análisis de residuales estandarizados, valores de apalancamiento (leverage) y la Distancia de Cook. El modelo final identificó cuatro variables explicativas principales y alcanzó un coeficiente de determinación ajustado de 0.9410. La validación sobre un subconjunto de datos de prueba no utilizados durante el entrenamiento obtuvo un coeficiente de determinación de 0.9270, evidenciando una sólida capacidad de generalización. Los resultados concluyen que la carga cognitiva constituye el predictor más importante del nivel de estrés, mientras que una mayor tasa de éxito en las tareas contribuye a mitigar dicho fenómeno.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Regresión lineal múltiple, Ciencia de Datos, Estrés laboral, Desarrollo de software, Análisis estadístico, Machine Learning, Carga Cognitiva.
+\end{IEEEkeywords}
+
+\section{Introducción}
+
+El crecimiento exponencial de la industria del software y la adopción de metodologías ágiles de desarrollo han incrementado significativamente la necesidad de comprender los factores psicosociales y técnicos que afectan el desempeño diario de los ingenieros y desarrolladores. Variables como la carga cognitiva, la duración de las tareas, la cantidad de errores producidos (bugs) y el volumen sostenido de trabajo pueden influir de manera drástica sobre el nivel de estrés experimentado durante el ciclo de vida del desarrollo de proyectos tecnológicos. 
+
+\subsection{Revisión del Estado del Arte}
+Diversas investigaciones recientes han demostrado que altos niveles de estrés crónico y el agotamiento (burnout) no solo afectan la salud mental del individuo, sino que impactan de manera tangible y negativa la productividad métrica, la mantenibilidad del software y la satisfacción laboral \cite{softwarestress}. Estudios como los realizados en el marco de la métrica DORA (DevOps Research and Assessment) indican que un entorno de trabajo con alta carga de errores no resueltos y despliegues problemáticos correlaciona fuertemente con la ansiedad del equipo técnico \cite{developerproductivity}. 
+
+Por otro lado, la incorporación reciente de asistentes de Inteligencia Artificial (IA) en la programación introduce una nueva dinámica: si bien pueden reducir el tiempo de tipeo, también pueden incrementar la carga cognitiva al requerir que el desarrollador revise e integre código generado por terceros de manera constante. Entender matemáticamente cómo estas métricas convergen en el nivel de estrés es fundamental para la correcta gestión de proyectos.
+
+\subsection{Justificación y Objetivos}
+La regresión lineal múltiple constituye una de las técnicas estadísticas más robustas y utilizadas para modelar relaciones empíricas entre una variable dependiente de interés y múltiples covariables explicativas \cite{montgomery}. A diferencia de algoritmos de "caja negra" en aprendizaje automático, la regresión lineal ofrece una alta interpretabilidad de los coeficientes obtenidos, permitiendo inferir no solo si una variable afecta al fenómeno, sino la magnitud y la dirección exacta de dicho efecto \cite{james}.
+
+El objetivo principal de este trabajo de investigación consiste en construir, entrenar y validar un modelo estadístico capaz de identificar qué variables métricas explican de manera sustancial la varianza en el nivel de estrés de los desarrolladores de software. Secundariamente, el estudio busca aplicar buenas prácticas de curación de datos empíricos, validar estadísticamente las suposiciones subyacentes del teorema de Gauss-Markov y evaluar el impacto de observaciones influyentes en la estabilidad del modelo matemático predictivo.
+
+\section{Metodología}
+
+\subsection{Descripción del Conjunto de Datos}
+Para el desarrollo experimental se utilizó el conjunto de datos \textit{AI Developer Performance Extended}, estructurado formalmente por 1000 instancias (observaciones) independientes que documentan el desempeño de desarrolladores de software bajo distintos entornos y requerimientos. 
+
+La variable de respuesta o dependiente ($Y$) seleccionada para el modelo es:
+\begin{itemize}
+\item \textbf{Stress\_Level}: Métrica continua que representa el nivel de estrés reportado por el desarrollador.
+\end{itemize}
+
+El espacio de características inicial incluyó un máximo de 12 variables predictoras ($X_i$):
+\begin{enumerate}
+    \item \textit{Hours\_Coding}: Horas invertidas activamente en escritura de código.
+    \item \textit{Lines\_of\_Code}: Volumen de líneas de código generadas.
+    \item \textit{Bugs\_Found}: Errores identificados durante las pruebas.
+    \item \textit{Bugs\_Fixed}: Errores exitosamente parcheados.
+    \item \textit{AI\_Usage\_Hours}: Tiempo de uso de herramientas de asistencia algorítmica.
+    \item \textit{Sleep\_Hours}: Horas de descanso nocturno del individuo.
+    \item \textit{Cognitive\_Load}: Índice métrico del esfuerzo mental requerido.
+    \item \textit{Task\_Success\_Rate}: Porcentaje de tareas completadas con éxito.
+    \item \textit{Coffee\_Intake}: Tazas de café consumidas durante la jornada.
+    \item \textit{Task\_Duration\_Hours}: Tiempo promedio en resolver una tarea.
+    \item \textit{Commits}: Número de integraciones de código al repositorio.
+    \item \textit{Errors}: Advertencias o errores de sintaxis en tiempo de ejecución.
+\end{enumerate}
+
+\subsection{Fundamentación Matemática del Modelo}
+El modelo probabilístico de regresión lineal múltiple asume que la variable respuesta $Y$ se relaciona linealmente con un vector de regresores $X_1, X_2, \dots, X_k$ mediante la siguiente ecuación poblacional \cite{kutner}:
+
+\begin{equation}
+Y_i = \beta_0 + \beta_1 X_{i1} + \beta_2 X_{i2} + \dots + \beta_k X_{ik} + \epsilon_i
+\end{equation}
+
+Donde $\beta_0$ es el intercepto, $\beta_j$ representa el cambio parcial en $Y$ ante el incremento unitario en $X_j$ manteniendo el resto de las variables constantes, y $\epsilon_i$ es el término de error aleatorio. Los parámetros $\beta$ fueron estimados minimizando la suma de los cuadrados de los residuos (Mínimos Cuadrados Ordinarios, OLS).
+
+\subsection{Curación y Limpieza de Datos}
+La fiabilidad de un modelo estadístico depende en gran medida de la calidad del dataset de entrada. Como fase inicial, se ejecutó un algoritmo de identificación de valores nulos o registros incompletos. Las instancias con datos faltantes (NA) fueron descartadas mediante procesos de omisión por lista computacional (\texttt{na.omit()}) garantizando así una matriz de diseño de rango completo.
+
+\subsection{Selección Algorítmica de Variables}
+Para cumplir con el marco metodológico, que estipula la obtención de un modelo explicativo con un mínimo de 4 y un máximo de 8 variables predictoras, se desarrolló e implementó un algoritmo iterativo de eliminación hacia atrás (\textit{Backward Elimination}). 
+
+El algoritmo parte del modelo "saturado" (12 variables) y en cada iteración evalúa la significancia estadística de los regresores a través de un contraste de hipótesis bilateral sobre los coeficientes:
+\begin{equation}
+H_0: \beta_j = 0 \quad \text{vs} \quad H_1: \beta_j \neq 0
+\end{equation}
+
+El regresor con el valor-p máximo asociado al estadístico $t$ de Student es eliminado, reentrenando el modelo empírico hasta que el R-cuadrado ajustado ($R^2_{adj}$) se maximice, logrando el subconjunto óptimo sin violar el límite dimensional establecido.
+
+\section{Experimentos y Resultados}
+
+\subsection{Análisis Exploratorio de Datos (EDA)}
+Previo a la fase de modelado, se analizó el comportamiento univariante de las métricas. La Tabla \ref{tab:descriptivos} resume las principales estadísticas de tendencia central para caracterizar la muestra de desarrolladores.
+
+\begin{table}[H]
+\centering
+\caption{Resumen descriptivo del conjunto de datos}
+\label{tab:descriptivos}
+\begin{tabular}{lcc}
+\toprule
+Variable & Media & Mediana \\
+\midrule
+Hours\_Coding & 5.84 & 6.00 \\
+Lines\_of\_Code & 356.20 & 332.00 \\
+Bugs\_Found & 9.88 & 10.00 \\
+Bugs\_Fixed & 7.15 & 7.00 \\
+AI\_Usage\_Hours & 2.96 & 3.00 \\
+Sleep\_Hours & 6.47 & 6.40 \\
+Cognitive\_Load & 56.93 & 57.00 \\
+Task\_Success\_Rate & 56.58 & 55.50 \\
+Coffee\_Intake & 3.37 & 3.00 \\
+Stress\_Level & 66.41 & 66.00 \\
+Task\_Duration\_Hours & 8.70 & 7.45 \\
+Commits & 17.25 & 14.00 \\
+Errors & 4.54 & 5.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Análisis de Correlación y Multicolinealidad}
+La presencia de correlaciones elevadas entre variables predictoras (multicolinealidad) infla la varianza de los estimadores OLS, haciéndolos inestables y afectando la interpretabilidad. Para abordar este problema, se calculó la matriz de correlación de Pearson y se diseñó un bucle analítico que inspecciona exhaustivamente pares de variables.
+
+Se estableció un umbral de alerta absoluto de correlación superior a 0.80 ($|r| > 0.80$) para identificar redundancia estructural en los datos. La matriz visual resultante permitió detectar que ciertas dinámicas entre la cantidad de horas programando y líneas de código rozaban márgenes de colinealidad, los cuales debieron ser ajustados en iteraciones posteriores.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\columnwidth]{Rplot02.png}
+\caption{Matriz de correlaciones de las variables de productividad y estrés.}
+\label{fig:qqplot}
+\end{figure}
+
+\subsection{Evolución de la Selección de Características}
+Tras dividir el conjunto en 80\% para entrenamiento y 20\% de prueba (garantizando así una evaluación no sesgada del modelo), se ejecutó el bucle de \textit{Backward Elimination}. La Tabla \ref{tab:modelos} ilustra cómo la eliminación progresiva de variables redundantes estabilizó e incluso mejoró marginalmente la penalización del estadístico de bondad de ajuste.
+
+\begin{table}[H]
+\centering
+\caption{Evolución iterativa del R-cuadrado ajustado}
+\label{tab:modelos}
+\begin{tabular}{ccc}
+\toprule
+Iteración & Total Variables & $R^2_{Adj}$ Estimado \\
+\midrule
+1 & 12 & 0.9405 \\
+2 & 11 & 0.9405 \\
+3 & 10 & 0.9406 \\
+4 & 9 & 0.9407 \\
+5 & 8 & 0.9408 \\
+6 & 7 & 0.9408 \\
+7 & 6 & 0.9409 \\
+8 & 5 & 0.9409 \\
+9 & 4 & 0.9410 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El algoritmo se detuvo exitosamente al aislar las 4 variables más críticas, logrando la máxima parsimonia exigida.
+
+\subsection{Interpretación del Modelo Final}
+El subconjunto ganador de variables permitió derivar la siguiente ecuación estocástica predictiva:
+
+\begin{equation}
+\begin{aligned}
+\widehat{Stress} &= 19.892 - 0.0014(Lines\_of\_Code) \\
+&\quad + 0.9002(Cognitive\_Load) \\
+&\quad - 0.0819(Task\_Success\_Rate) \\
+&\quad + 0.0449(Task\_Duration\_Hours)
+\end{aligned}
+\end{equation}
+
+En base a los estimadores calculados:
+\begin{itemize}
+    \item \textbf{Carga Cognitiva (\textit{Cognitive Load}):} Por cada incremento de una unidad en el índice de carga cognitiva, se proyecta un aumento directo de 0.9002 unidades en el nivel de estrés del desarrollador, manteniendo las demás variables constantes. Su p-valor ($<0.001$) demuestra que es altamente significativa.
+    \item \textbf{Tasa de Éxito (\textit{Task Success Rate}):} Ejerce un factor protector; un aumento del 1\% en el éxito de las tareas se asocia con una reducción de 0.0819 unidades en la métrica de estrés.
+\end{itemize}
+
+Las variables \textit{Líneas de Código} y \textit{Duración de la Tarea} se retuvieron por su valor estructural para sostener el estadístico F y absorber la varianza, a pesar de sus contribuciones marginales individuales más bajas.
+
+\subsection{Comprobación de las Suposiciones del Modelo}
+Para garantizar la validez inferencial de los estimadores se verificaron los supuestos fundamentales:
+
+\begin{enumerate}
+    \item \textbf{Normalidad de los Errores:} Se analizó el gráfico cuantil-cuantil (QQ-Plot), donde los residuales observados se alinearon sólidamente sobre la bisectriz teórica, indicando que los errores se distribuyen normalmente, permitiendo confiar en los intervalos de confianza.
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{Qqplot.png}
+    \caption{Gráfico Cuantil-Cuantil (Q-Q Plot) de los residuales del modelo.}
+    \label{fig:qqplot}
+    \end{figure}
+    
+    \item \textbf{Homocedasticidad:} Al graficar los residuos frente a los valores ajustados ($\hat{Y}$), se evidenció una nube de puntos aleatoria sin patrones de embudo, corroborando que la varianza de los errores es constante en todo el espectro de predicción.
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{homocedasticidad.png}
+    \caption{Gráfico de residuales frente a valores ajustados para la verificación de varianza constante.}
+    \label{fig:homocedasticidad}
+    \end{figure}
+    \end{enumerate}
+
+\subsection{Análisis de Observaciones Atípicas e Influyentes [cite: 100]}
+Se implementó un protocolo matemático estricto para mitigar el efecto de datos anómalos[cite: 101]. Las observaciones con un residuo estandarizado superior a 2 en valor absoluto se consideraron \textit{outliers}[cite: 102]. Para detectar observaciones con alto nivel de apalancamiento (\textit{leverage}), se calcularon los valores $h_{ii}$ de la diagonal de la matriz sombrero (\textit{Hat Matrix}), considerando problemáticos aquellos que superaron el umbral $3(p + 1)/n$, donde $p$ representa el número de variables explicativas[cite: 103]. Finalmente, la influencia global se midió con la Distancia de Cook ($D_{i}$), penalizando observaciones con valor $D_{i} > 1$[cite: 104]. El filtro arrojó resultados destacables: 2 observaciones atípicas estandarizadas (que se amplían a 10 bajo el umbral estudentizado), 14 con elevado \textit{leverage}, y 0 observaciones influyentes bajo el criterio estricto de Cook[cite: 105]. Esto indica una matriz de datos estructuralmente sana[cite: 106].
+
+\subsection{Validación Externa y Rendimiento General}
+El modelo ajustado reportó un $R^2 = 0.9413$ sobre el set de entrenamiento con un Error Estándar Residual de 5.354. Al confrontar el modelo con el 20\% de los datos no vistos durante la partición inicial (fase de prueba/testing), se obtuvo un R-cuadrado predictivo asombrosamente alto:
+
+\begin{equation}
+R^2_{test} = 0.9270
+\end{equation}
+
+Esta leve caída frente al rendimiento de entrenamiento (apenas del $1.4\%$) confirma la ausencia total de sobreajuste (\textit{overfitting}).
+
+\section{Limitaciones y Trabajos Futuros}
+
+A pesar del elevado coeficiente de determinación ajustado
+($R^2_{Adj}=0.9410$) y la sólida capacidad de generalización
+demostrada durante la fase de validación externa
+($R^2_{Test}=0.9270$), el presente modelo estadístico posee
+limitaciones metodológicas inherentes que abren nuevas
+oportunidades de investigación y desarrollo tecnológico.
+
+En primer lugar, el conjunto de datos analizado se fundamenta
+en métricas obtenidas de manera estática o mediante registros
+históricos. Aunque estas variables permitieron explicar gran
+parte de la variabilidad observada en el nivel de estrés, no
+capturan completamente la naturaleza dinámica y multifactorial
+de los entornos modernos de desarrollo de software.
+
+Con el objetivo de superar estas limitaciones y ampliar el
+alcance de la investigación, se plantean las siguientes líneas
+de trabajo futuro.
+
+\subsection{Monitoreo Predictivo en Plataformas Full-Stack}
+
+Los coeficientes de regresión calibrados en este estudio
+sientan las bases para la creación de herramientas avanzadas
+de gestión y monitoreo de equipos de desarrollo de software.
+Se proyecta el diseño de una plataforma web analítica basada
+en arquitecturas modernas de tipo Full-Stack, tales como
+MERN (MongoDB, Express, React y Node.js), capaz de
+integrar automáticamente métricas provenientes de repositorios
+de código, herramientas de gestión de proyectos y sistemas de
+integración continua.
+
+La incorporación del modelo estadístico dentro de este tipo de
+plataformas permitiría generar alertas tempranas sobre posibles
+incrementos en los niveles de estrés, facilitando la toma de
+decisiones preventivas por parte de líderes técnicos, Scrum
+Masters y gerentes de proyecto. De esta forma, el sistema
+podría contribuir a mejorar la asignación de tareas, reducir el
+riesgo de agotamiento laboral y optimizar el rendimiento de
+los equipos de desarrollo.
+
+\subsection{Integración de Variables Fisiológicas y Biométricas}
+
+Una limitación importante del modelo actual radica en que
+únicamente considera variables relacionadas con productividad,
+desempeño y carga cognitiva. Sin embargo, el estrés constituye
+un fenómeno complejo que también se manifiesta mediante
+respuestas fisiológicas medibles.
+
+Como trabajo futuro se propone complementar el conjunto de
+variables con indicadores biométricos obtenidos mediante
+dispositivos de monitoreo no invasivo, tales como frecuencia
+cardíaca, variabilidad del ritmo cardíaco (HRV), calidad del
+sueño, niveles de actividad física y conductancia de la piel.
+La incorporación de este tipo de información permitiría
+desarrollar modelos híbridos capaces de integrar variables
+conductuales y fisiológicas, obteniendo una representación más
+precisa del estado emocional y cognitivo de los desarrolladores.
+
+Además, la combinación de métricas biométricas con variables
+de productividad podría facilitar la detección temprana de
+episodios de fatiga, sobrecarga cognitiva y agotamiento
+profesional, incrementando la utilidad práctica de los sistemas
+de monitoreo de bienestar laboral.
+
+\subsection{Aplicación de Técnicas de Aprendizaje Automático Avanzado}
+
+La regresión lineal múltiple constituye una herramienta
+estadística ampliamente utilizada debido a su simplicidad,
+interpretabilidad y facilidad de implementación. No obstante,
+este enfoque supone relaciones lineales entre las variables
+predictoras y la variable objetivo, lo que puede limitar su
+capacidad para capturar patrones complejos presentes en
+escenarios reales.
+
+Por esta razón, futuras investigaciones podrían evaluar el uso
+de algoritmos de aprendizaje automático más avanzados,
+incluyendo Random Forest, Gradient Boosting, Support Vector
+Regression y Redes Neuronales Artificiales. Estas técnicas
+permiten modelar relaciones no lineales, detectar interacciones
+complejas entre variables y mejorar potencialmente la precisión
+predictiva del sistema.
+
+\section{Conclusiones}
+
+El presente estudio culminó exitosamente en la construcción de un modelo de regresión lineal múltiple capaz de mapear con gran certidumbre matemática el nivel de estrés de los desarrolladores de software, logrando explicar más del 94\% de la variabilidad subyacente. 
+
+Mediante el desarrollo e integración de un algoritmo sistemático de \textit{Backward Elimination}, el modelo original de doce dimensiones fue exitosamente depurado, convergiendo en un espacio dimensional parsimonioso de cuatro características que satisface los requerimientos técnicos del proyecto. Esta depuración demostró que, en análisis de datos, incorporar múltiples variables redundantes no garantiza mejor precisión.
+
+Estadísticamente, se concluye que la métrica de Carga Cognitiva representa el catalizador psicosocial más agresivo respecto al estrés tecnológico humano. Por su parte, la Tasa de Éxito empodera al desarrollador, amortiguando la curva de tensión mental. 
+
+La comprobación exhaustiva de las suposiciones de OLS, junto a la métrica robusta de $R^2 = 0.9270$ en validación externa, garantizan que los hallazgos son estadísticamente consistentes, reproducibles y constituyen una herramienta científica de alto valor para la gerencia de proyectos ágiles.
+
+\begin{thebibliography}{99}
+
+\bibitem{montgomery}
+D. Montgomery, E. Peck y G. Vining,
+\textit{Introduction to Linear Regression Analysis},
+5th ed.,
+Wiley,
+2012.
+
+\bibitem{kutner}
+M. Kutner, C. Nachtsheim, J. Neter y W. Li,
+\textit{Applied Linear Statistical Models},
+McGraw-Hill,
+2005.
+
+\bibitem{james}
+G. James, D. Witten, T. Hastie y R. Tibshirani,
+\textit{An Introduction to Statistical Learning with Applications in R},
+Springer,
+2021.
+
+\bibitem{hastie}
+T. Hastie, R. Tibshirani y J. Friedman,
+\textit{The Elements of Statistical Learning},
+Springer,
+2009.
+
+\bibitem{wickham}
+H. Wickham y G. Grolemund,
+\textit{R for Data Science},
+O'Reilly,
+2017.
+
+\bibitem{softwarestress}
+M. Graziotin, F. Fagerholm, X. Wang y P. Abrahamsson,
+``Consequences of unhappiness while developing software,''
+in \textit{International Conference on Evaluation and Assessment in Software Engineering},
+2017.
+
+\bibitem{developerproductivity}
+N. Forsgren, J. Humble y G. Kim,
+\textit{Accelerate: The Science of Lean Software and DevOps},
+IT Revolution Press,
+2018.
+
+\end{thebibliography}
+
+\section*{Disponibilidad de Datos y Materiales}
+
+En alineación con las buenas prácticas de la Ciencia Abierta (Open Science) y la Investigación Reproducible, todos los recursos digitales utilizados y generados durante el desarrollo de este proyecto se encuentran respaldados y disponibles públicamente. 
+
+El repositorio en línea contiene el conjunto de datos original (\textit{AI Developer Performance Extended}), el dataset resultante tras la curación de datos, y el código fuente completo escrito en lenguaje R (\texttt{modelo\_estres\_devs.R}). Este script incluye las rutinas algorítmicas detalladas para el análisis exploratorio, la matriz de correlación visual, el bucle de iteración del método \textit{Backward Elimination} y los diagnósticos de los residuales estandarizados. 
+
+Se invita a la comunidad académica y a los revisores del presente trabajo a consultar, auditar y reproducir los experimentos a través del repositorio oficial alojado en GitHub: 
+
+\begin{center}
+\url{https://github.com/aledash3/modelo-estres-devs}
+\end{center}
+
+La documentación técnica del repositorio incluye un archivo \texttt{README.md} con las instrucciones de ejecución y las dependencias de librerías necesarias (como \texttt{corrplot}) para replicar exactamente los mismos coeficientes de regresión reportados en la sección de Resultados.
+
+\end{document}
