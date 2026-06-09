@@ -151,9 +151,9 @@ Se estableció un umbral de alerta absoluto de correlación superior a 0.80 ($|r
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\columnwidth]{Rplot02.png}
+\includegraphics[width=\columnwidth]{Figuras/matriz_correlación.png}
 \caption{Matriz de correlaciones de las variables de productividad y estrés.}
-\label{fig:qqplot}
+\label{fig:matriz_correlación}
 \end{figure}
 
 \subsection{Evolución de la Selección de Características}
@@ -210,16 +210,16 @@ Para garantizar la validez inferencial de los estimadores se verificaron los sup
 
     \begin{figure}[H]
     \centering
-    \includegraphics[width=\columnwidth]{Qqplot.png}
+    \includegraphics[width=\columnwidth]{Figuras/Qqplot.png}
     \caption{Gráfico Cuantil-Cuantil (Q-Q Plot) de los residuales del modelo.}
-    \label{fig:qqplot}
+    \label{fig:normalidad}
     \end{figure}
     
     \item \textbf{Homocedasticidad:} Al graficar los residuos frente a los valores ajustados ($\hat{Y}$), se evidenció una nube de puntos aleatoria sin patrones de embudo, corroborando que la varianza de los errores es constante en todo el espectro de predicción.
 
     \begin{figure}[H]
     \centering
-    \includegraphics[width=\columnwidth]{homocedasticidad.png}
+    \includegraphics[width=\columnwidth]{Figuras/Residuals_vs_fitted.png}
     \caption{Gráfico de residuales frente a valores ajustados para la verificación de varianza constante.}
     \label{fig:homocedasticidad}
     \end{figure}
