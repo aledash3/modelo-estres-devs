@@ -1,316 +1,209 @@
 # 🧠 Modelado Estadístico del Nivel de Estrés en Desarrolladores de Software a partir de Métricas de Productividad y Carga Cognitiva
 
-![R](https://img.shields.io/badge/R-276DC3?style=for-the-badge\&logo=r\&logoColor=white)
-![RStudio](https://img.shields.io/badge/RStudio-75AADB?style=for-the-badge\&logo=RStudio\&logoColor=white)
-![LaTeX](https://img.shields.io/badge/LaTeX-008080?style=for-the-badge\&logo=latex\&logoColor=white)
-![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Regression-orange?style=for-the-badge)
-![Statistics](https://img.shields.io/badge/Statistical%20Modeling-OLS-blue?style=for-the-badge)
+![R](https://img.shields.io/badge/R-4.0%2B-276DC3?style=for-the-badge&logo=r&logoColor=white)
+![RStudio](https://img.shields.io/badge/RStudio-IDE-75AADB?style=for-the-badge&logo=RStudio&logoColor=white)
+![LaTeX](https://img.shields.io/badge/LaTeX-Paper-008080?style=for-the-badge&logo=latex&logoColor=white)
+![Machine Learning](https://img.shields.io/badge/Model-OLS%20Regression-orange?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Academic%20Use-blue?style=for-the-badge)
 
 ---
 
-# 📌 Descripción General
+## 📌 Descripción General
 
-Este repositorio contiene el desarrollo completo del proyecto académico **"Modelado Estadístico del Nivel de Estrés en Desarrolladores de Software a partir de Métricas de Productividad y Carga Cognitiva"**, elaborado para la asignatura de Modelos Estocásticos y Estadística Inferencial de la Universidad Politécnica Salesiana.
+Este repositorio contiene el desarrollo completo del proyecto de investigación y modelado estadístico **"Modelado Estadístico del Nivel de Estrés en Desarrolladores de Software a partir de Métricas de Productividad y Carga Cognitiva"**, elaborado para la asignatura de **Modelos Estocásticos y Estadística Inferencial** de la **Universidad Politécnica Salesiana** (Quito, Ecuador).
 
-El objetivo principal consiste en identificar qué variables relacionadas con productividad, desempeño y carga cognitiva explican significativamente el nivel de estrés de desarrolladores de software mediante técnicas de regresión lineal múltiple.
+El objetivo central consiste en identificar qué variables cuantitativas de productividad, desempeño y demanda mental explican de manera estadísticamente significativa el nivel de estrés autopercibido por ingenieros de software asistidos por herramientas de inteligencia artificial.
 
-El estudio utiliza un conjunto de datos de 1000 observaciones que simulan métricas de desempeño de desarrolladores asistidos por herramientas de inteligencia artificial.
-
----
-
-# 🎯 Objetivos
-
-## Objetivo General
-
-Construir un modelo de regresión lineal múltiple capaz de explicar y predecir el nivel de estrés de desarrolladores de software a partir de variables relacionadas con productividad y carga cognitiva.
-
-## Objetivos Específicos
-
-* Realizar limpieza y preparación del conjunto de datos.
-* Analizar relaciones entre variables mediante correlaciones.
-* Detectar posibles problemas de multicolinealidad.
-* Implementar un procedimiento de selección de variables mediante Backward Elimination.
-* Evaluar la calidad del modelo utilizando métricas estadísticas.
-* Identificar observaciones atípicas e influyentes.
-* Validar la capacidad predictiva del modelo sobre datos no observados.
+El estudio analiza un conjunto de datos de **1,000 observaciones**, evaluando supuestos de regresión lineal múltiple (OLS), multicolinealidad, detección de observaciones influyentes y validación externa en datos no observados.
 
 ---
 
-# 📊 Dataset Utilizado
+## 📄 Artículos Científicos (Papers)
 
-**Nombre del Dataset**
+El proyecto cuenta con dos versiones del artículo en formato formal para conferencias:
 
-AI Developer Performance Extended
-
-**Número de observaciones**
-
-1000 registros
-
-**Variable objetivo**
-
-* Stress_Level
-
-**Variables predictoras iniciales**
-
-* Hours_Coding
-* Lines_of_Code
-* Bugs_Found
-* Bugs_Fixed
-* AI_Usage_Hours
-* Sleep_Hours
-* Cognitive_Load
-* Task_Success_Rate
-* Coffee_Intake
-* Task_Duration_Hours
-* Commits
-* Errors
+* 📥 **[Descargar Paper en Formato IEEE (PDF)](paper/ieee/Paper_IEEE.pdf)**
+* 📥 **[Descargar Paper en Formato EasyChair (PDF)](paper/easychair/Paper_EasyChair.pdf)**
 
 ---
 
-# 🏗️ Metodología
-
-El desarrollo del proyecto se estructuró en cuatro etapas principales.
-
-## 1️⃣ Limpieza y Preparación de Datos
-
-Se realizó la eliminación de registros incompletos mediante:
-
-```r
-data <- na.omit(data)
-```
-
-garantizando consistencia estadística para el análisis posterior.
-
----
-
-## 2️⃣ Análisis Exploratorio de Datos (EDA)
-
-Se calcularon:
-
-* Estadísticas descriptivas
-* Matriz de correlaciones
-* Análisis de multicolinealidad
-* Distribuciones de variables
-
-La correlación entre variables fue evaluada mediante el coeficiente de Pearson.
-
-Se consideró posible multicolinealidad cuando:
+## 📂 Estructura del Repositorio
 
 ```text
-|r| > 0.80
+modelo-estres-devs/
+├── data/
+│   └── AI_Developer_Performance_Extended_1000.csv  # Dataset completo (1000 registros)
+├── scripts/
+│   └── modelo_estres_devs.R                        # Script de modelado estadístico y evaluación
+├── paper/
+│   ├── ieee/
+│   │   ├── paperieee.tex                           # Fuente LaTeX formato IEEE
+│   │   └── Paper_IEEE.pdf                          # Documento compilado
+│   └── easychair/
+│       ├── papereasychair.tex                      # Fuente LaTeX formato EasyChair
+│       ├── easychair.cls                           # Clase de estilo LaTeX
+│       └── Paper_EasyChair.pdf                     # Documento compilado
+├── results/
+│   └── figures/                                    # Gráficos generados en alta resolución (300 DPI)
+│       ├── matriz_correlacion.png
+│       ├── diagnostico_residuales.png
+│       └── prediccion_vs_real.png
+├── modelo-estres-devs.Rproj                        # Proyecto de RStudio
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-## 3️⃣ Construcción del Modelo
+## 🎯 Objetivos
 
-Se dividió el conjunto de datos en:
+### Objetivo General
+Construir un modelo de regresión lineal múltiple (OLS) parsimonioso y estadísticamente robusto capaz de explicar y predecir el nivel de estrés de desarrolladores de software a partir de variables de productividad y carga mental.
 
-* 80% Entrenamiento
-* 20% Prueba
-
-Posteriormente se implementó un modelo de:
-
-**Regresión Lineal Múltiple (OLS)**
-
-utilizando la función:
-
-```r
-lm()
-```
-
-La selección de variables se realizó mediante:
-
-**Backward Elimination**
-
-eliminando iterativamente la variable menos significativa según su valor-p.
+### Objetivos Específicos
+1. **Curaduría y preparación**: Limpieza de registros y verificación de calidad de datos.
+2. **Análisis Exploratorio (EDA)**: Evaluar correlaciones de Pearson y detectar multicolinealidad bilateral.
+3. **Selección de Variables**: Implementar *Backward Elimination* iterativo optimizando el $R^2$ ajustado.
+4. **Diagnóstico de Supuestos**: Evaluar normalidad de errores, homocedasticidad, outliers studentizados y distancia de Cook.
+5. **Validación Externa**: Medir el poder de generalización sobre un conjunto de prueba independiente (20%).
 
 ---
 
-## 4️⃣ Diagnóstico y Validación
+## 📊 Dataset Utilizado
 
-Se evaluaron:
-
-### Outliers
-
-Mediante residuales estandarizados:
-
-```r
-abs(rstandard(modelo)) > 2
-```
-
-### Observaciones Influyentes
-
-Utilizando:
-
-* Leverage (Hat Values)
-* Distancia de Cook
-
-### Validación Predictiva
-
-Se calculó el desempeño del modelo sobre el conjunto de prueba mediante:
-
-```r
-cor(predicciones, valores_reales)^2
-```
+* **Nombre del Dataset**: `AI_Developer_Performance_Extended_1000.csv`
+* **Observaciones**: 1,000 registros
+* **Variable Dependiente (Target)**: `Stress_Level` (Escala continua de nivel de estrés)
+* **Variables Predictoras Iniciales (12)**:
+  * `Hours_Coding`: Horas dedicadas a programación.
+  * `Lines_of_Code`: Líneas de código escritas.
+  * `Bugs_Found`: Fallos encontrados.
+  * `Bugs_Fixed`: Fallos corregidos.
+  * `AI_Usage_Hours`: Horas de asistencia con herramientas de IA.
+  * `Sleep_Hours`: Horas de sueño reportadas.
+  * `Cognitive_Load`: Carga cognitiva estimada.
+  * `Task_Success_Rate`: Tasa de éxito en resolución de tareas.
+  * `Coffee_Intake`: Consumo de café.
+  * `Task_Duration_Hours`: Duración promedio de tareas.
+  * `Commits`: Cantidad de confirmaciones realizadas.
+  * `Errors`: Errores de compilación o ejecución.
 
 ---
 
-# 📈 Resultados Principales
+## 🏗️ Metodología y Resultados
 
-## Selección de Variables
+### 1️⃣ Limpieza y Partición de Datos
+* Se verificó la consistencia y ausencia de valores nulos (`na.omit`).
+* Partición aleatoria con semilla reproducible (`set.seed(123)`):
+  * **80% Entrenamiento** ($n = 800$)
+  * **20% Prueba** ($n = 200$)
 
-El procedimiento Backward Elimination redujo el modelo original de 12 variables a un conjunto óptimo de 4 variables predictoras.
+### 2️⃣ Análisis Exploratorio y Multicolinealidad
+Se evaluó la matriz de correlaciones entre todas las variables cuantitativas:
 
-Variables finales:
+<p align="center">
+  <img src="results/figures/matriz_correlacion.png" alt="Matriz de Correlación" width="650">
+</p>
 
-* Lines_of_Code
-* Cognitive_Load
-* Task_Success_Rate
-* Task_Duration_Hours
+* Se identificaron correlaciones fuertes esperadas entre `Cognitive_Load` y `Stress_Level` ($r = 0.9686$), así como una relación inversa con `Task_Success_Rate` ($r = -0.9195$).
+* No se evidenciaron problemas de multicolinealidad severa que distorsionaran la estimación de coeficientes tras la selección.
 
----
+### 3️⃣ Selección de Variables (Backward Elimination)
+A partir del modelo saturado (12 predictores), el procedimiento eliminó iterativamente las variables menos significativas según su valor-$p$, seleccionando el modelo óptimo con 4 variables clave:
+* `Lines_of_Code`
+* `Cognitive_Load`
+* `Task_Success_Rate`
+* `Task_Duration_Hours`
 
-## Modelo Final
-
-La ecuación obtenida fue:
-
-```text
-Stress_Level =
-19.892
-- 0.001424(Lines_of_Code)
-+ 0.900248(Cognitive_Load)
-- 0.081973(Task_Success_Rate)
-+ 0.044981(Task_Duration_Hours)
-```
-
----
-
-## Bondad de Ajuste
-
-| Métrica                 | Valor   |
-| ----------------------- | ------- |
-| R²                      | 0.9413  |
-| R² Ajustado             | 0.9410  |
-| Error Estándar Residual | 5.354   |
-| Estadístico F           | 3185    |
-| p-valor Global          | < 0.001 |
-
-El modelo explica aproximadamente el **94.1% de la variabilidad observada en el nivel de estrés**.
+**Ecuación del Modelo Final:**
+$$\text{Stress\_Level} = 19.8920 - 0.0014(\text{Lines\_of\_Code}) + 0.9002(\text{Cognitive\_Load}) - 0.0820(\text{Task\_Success\_Rate}) + 0.0450(\text{Task\_Duration\_Hours})$$
 
 ---
 
-## Validación Externa
+### 4️⃣ Diagnóstico del Modelo y Supuestos Estadísticos
 
-Desempeño sobre el conjunto de prueba:
+<p align="center">
+  <img src="results/figures/diagnostico_residuales.png" alt="Diagnóstico de Residuales" width="700">
+</p>
 
-```text
-R²_test = 0.9270
-```
-
-Esto demuestra una elevada capacidad de generalización.
-
----
-
-## Diagnóstico de Observaciones
-
-Se detectaron:
-
-| Tipo                  | Cantidad |
-| --------------------- | -------- |
-| Outliers              | 1        |
-| Leverage Alto         | 7        |
-| Distancia de Cook > 1 | 0        |
-
-Los resultados indican que el modelo es estable y no se encuentra afectado por observaciones extremadamente influyentes.
+* **Homocedasticidad**: Los residuos muestran dispersión homogénea a lo largo de los valores ajustados.
+* **Normalidad**: El gráfico Normal Q-Q confirma que los residuos siguen adecuadamente la distribución normal teórica.
+* **Observaciones Influyentes**: Ninguna observación superó el umbral crítico de distancia de Cook ($D_i > 1$), garantizando la estabilidad de los estimadores.
 
 ---
 
-# ⚙️ Requisitos
+### 5️⃣ Validación Externa en Datos de Prueba (20%)
 
-## Software
+El modelo ajustado se evaluó sobre las 200 observaciones no observadas del conjunto de prueba:
 
-* R 4.0 o superior
-* RStudio
+<p align="center">
+  <img src="results/figures/prediccion_vs_real.png" alt="Predicción vs Real" width="650">
+</p>
 
-## Librerías de R
-
-```r
-install.packages("corrplot")
-```
+| Métrica | Valor Obtenido |
+| :--- | :--- |
+| **$R^2$ (Entrenamiento)** | **0.9413** (94.1% de variabilidad explicada) |
+| **$R^2$ Ajustado** | **0.9410** |
+| **Error Estándar Residual ($\sigma$)** | **5.3538** |
+| **Estadístico $F$** | **3,184.75** ($p < 0.001$) |
+| **$R^2$ de Prueba ($R^2_{test}$)** | **0.9270** (Excelente capacidad predictiva) |
+| **Correlación al Cuadrado** | **0.9270** |
 
 ---
 
-# 🚀 Ejecución
+## 🚀 Puesta en Marcha
 
-## 1. Clonar el repositorio
+### Prerrequisitos
+* **R** (versión 4.0 o superior)
+* **RStudio** (recomendado)
 
+### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/akedasg3/modelo-estres-devs.git
+git clone https://github.com/aledash3/modelo-estres-devs.git
+cd modelo-estres-devs
 ```
 
-## 2. Abrir RStudio
+### 2. Ejecutar con RStudio
+1. Abre el archivo **`modelo-estres-devs.Rproj`** con RStudio (configurará el directorio de trabajo automáticamente).
+2. Abre el script `scripts/modelo_estres_devs.R`.
+3. Ejecuta el script completo (Ctrl + Shift + Enter o Source). El script se encargará de verificar dependencias y generar las gráficas en `results/figures/`.
 
-Abrir el archivo:
-
-```text
-modelo_estres_devs.R
+### 3. Ejecutar desde terminal (Línea de comandos)
+```bash
+Rscript scripts/modelo_estres_devs.R
 ```
 
-## 3. Ejecutar el script
+---
 
-Ejecutar todos los bloques de código en orden.
+## 🔬 Conclusiones Principales
 
-El programa realizará automáticamente:
-
-* Limpieza de datos
-* Cálculo de correlaciones
-* Construcción del modelo
-* Selección de variables
-* Detección de outliers
-* Validación estadística
-* Impresión del modelo final
+1. **Impacto de la Carga Cognitiva**: La variable `Cognitive_Load` resultó ser el factor más determinante y con mayor significancia estadística ($t = 34.15$, $p < 0.001$) para explicar el incremento del nivel de estrés.
+2. **Factor Protector**: La tasa de éxito en las tareas (`Task_Success_Rate`) actúa como un mitigador significativo ($p = 0.003$), indicando que el logro efectivo reduce la percepción de estrés.
+3. **Generalización**: La similitud entre el $R^2$ de entrenamiento ($0.9413$) y el de prueba ($0.9270$) confirma que el modelo no sufre de sobreajuste (*overfitting*).
 
 ---
 
-# 🔬 Conclusiones Principales
+## 👨‍🏫 Tutor Académico
 
-* La carga cognitiva fue el predictor más importante del nivel de estrés.
-* La tasa de éxito en las tareas presentó una relación inversa con el estrés.
-* El modelo alcanzó un excelente desempeño explicativo (R² = 0.9413).
-* La validación externa confirmó una adecuada capacidad predictiva (R² = 0.9270).
-* El proceso de selección permitió reducir significativamente la complejidad del modelo sin perder precisión.
+* **Dr. Diego Fernando Vallejo Huanga**  
+  *Docente Investigador — Universidad Politécnica Salesiana*
 
 ---
 
-# 👨‍🏫 Tutor Académico
+## 👨‍💻 Autores
 
-**Dr. Diego Fernando Vallejo Huanga**
+* **David Alejandro Cruz Palacios**
+* **Elvis Paúl García Acevedo**
+* **Naim Andre Michelena Andrade**
+* **Emily Mabel Ortega Constante**
+* **Carlos José Pilatuña Roldan**
+* **Mario Alexander Salazar Serna**
 
-Universidad Politécnica Salesiana
-
----
-
-# 👨‍💻 Autores
-
-* David Alejandro Cruz Palacios
-* Elvis Paúl García Acevedo 
-* Naim Andre Michelena Andrade
-* Emily Mabel Ortega Constante 
-* Carlos José Pilatuña Roldan 
-* Mario Alexander Salazar Serna
-
-Carrera de Ciencias de la Computación
-
-Facultad de Ingeniería
-
-Universidad Politécnica Salesiana
-
-Quito, Ecuador
+*Carrera de Ciencias de la Computación — Facultad de Ingeniería*  
+*Universidad Politécnica Salesiana — Sede Quito, Ecuador*
 
 ---
 
-# 📜 Licencia
+## 📜 Licencia
 
-Este proyecto fue desarrollado con fines académicos y educativos dentro de la Universidad Politécnica Salesiana.
-Todos los derechos pertenecen a sus respectivos autores.
+Este proyecto fue desarrollado exclusivamente con fines **académicos, educativos y de investigación** dentro de la Universidad Politécnica Salesiana. Todos los derechos pertenecen a sus respectivos autores. Queda prohibida su reproducción o explotación comercial sin autorización expresa.
