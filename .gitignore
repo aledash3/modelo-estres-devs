@@ -1,0 +1,44 @@
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+
+# Example: consider storing user-written package data here (e.g. within `inst/extdata`)
+# Rplots.pdf
+Rplots.pdf
+
+# RStudio files
+.Rproj.user/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
