@@ -116,7 +116,11 @@ A partir del modelo saturado (12 predictores), el procedimiento eliminó iterati
 * `Task_Duration_Hours`
 
 **Ecuación del Modelo Final:**
-$$\text{Stress\_Level} = 19.8920 - 0.0014(\text{Lines\_of\_Code}) + 0.9002(\text{Cognitive\_Load}) - 0.0820(\text{Task\_Success\_Rate}) + 0.0450(\text{Task\_Duration\_Hours})$$
+$$\text{Stress Level} = 19.8920 - 0.0014(\text{Lines of Code}) + 0.9002(\text{Cognitive Load}) - 0.0820(\text{Task Success Rate}) + 0.0450(\text{Task Duration Hours})$$
+
+```r
+Stress_Level = 19.8920 - 0.0014 * Lines_of_Code + 0.9002 * Cognitive_Load - 0.0820 * Task_Success_Rate + 0.0450 * Task_Duration_Hours
+```
 
 ---
 
