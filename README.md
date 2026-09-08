@@ -1,10 +1,10 @@
 # 🧠 Modelado Estadístico del Nivel de Estrés en Desarrolladores de Software a partir de Métricas de Productividad y Carga Cognitiva
 
-![R](https://img.shields.io/badge/R-4.0%2B-276DC3?style=for-the-badge&logo=r&logoColor=white)
-![RStudio](https://img.shields.io/badge/RStudio-IDE-75AADB?style=for-the-badge&logo=RStudio&logoColor=white)
-![LaTeX](https://img.shields.io/badge/LaTeX-Paper-008080?style=for-the-badge&logo=latex&logoColor=white)
-![Machine Learning](https://img.shields.io/badge/Model-OLS%20Regression-orange?style=for-the-badge)
-![License](https://img.shields.io/badge/License-Academic%20Use-blue?style=for-the-badge)
+[![R](https://img.shields.io/badge/R-4.0%2B-276DC3?style=for-the-badge&logo=r&logoColor=white)](https://www.r-project.org/)
+[![RStudio](https://img.shields.io/badge/RStudio-IDE-75AADB?style=for-the-badge&logo=RStudio&logoColor=white)](https://posit.co/)
+[![LaTeX](https://img.shields.io/badge/LaTeX-IEEE%20%26%20EasyChair-008080?style=for-the-badge&logo=latex&logoColor=white)](https://www.latex-project.org/)
+[![Model](https://img.shields.io/badge/Model-OLS%20Regression-orange?style=for-the-badge)](https://en.wikipedia.org/wiki/Ordinary_least_squares)
+![Licencia](https://img.shields.io/badge/Licencia-Acad%C3%A9mica%20y%20Educativa-blue?style=for-the-badge)
 
 ---
 
@@ -187,6 +187,23 @@ Rscript scripts/modelo_estres_devs.R
 
 ---
 
+## 👨‍💻 Autores
+
+Este proyecto fue desarrollado de forma colaborativa por:
+
+* **David Alejandro Cruz Palacios** — [@aledash3](https://github.com/aledash3)
+* **Elvis Paúl García Acevedo** — [@P1RULA1S](https://github.com/P1RULA1S)
+* **Naim Andre Michelena Andrade** — [@Andrexzx](https://github.com/Andrexzx)
+* **Emily Mabel Ortega Constante** — [@BOOTEABLE](https://github.com/BOOTEABLE)
+* **Carlos José Pilatuña Roldan** — [@Katsuro03](https://github.com/Katsuro03)
+* **Mario Alexander Salazar Serna** — [@mario-alexander-salazar](https://github.com/mario-alexander-salazar)
+
+Carrera de Ciencias de la Computación — Facultad de Ingeniería  
+**Universidad Politécnica Salesiana (UPS)**  
+Sede Quito, Ecuador
+
+---
+
 ## 👨‍🏫 Tutor Académico
 
 * **Dr. Diego Fernando Vallejo Huanga**  
@@ -194,20 +211,8 @@ Rscript scripts/modelo_estres_devs.R
 
 ---
 
-## 👨‍💻 Autores
-
-* **David Alejandro Cruz Palacios**
-* **Elvis Paúl García Acevedo**
-* **Naim Andre Michelena Andrade**
-* **Emily Mabel Ortega Constante**
-* **Carlos José Pilatuña Roldan**
-* **Mario Alexander Salazar Serna**
-
-*Carrera de Ciencias de la Computación — Facultad de Ingeniería*  
-*Universidad Politécnica Salesiana — Sede Quito, Ecuador*
-
----
-
 ## 📜 Licencia
 
-Este proyecto fue desarrollado exclusivamente con fines **académicos, educativos y de investigación** dentro de la Universidad Politécnica Salesiana. Todos los derechos pertenecen a sus respectivos autores. Queda prohibida su reproducción o explotación comercial sin autorización expresa.
+Este proyecto fue desarrollado exclusivamente con fines **académicos, educativos y de investigación** dentro de la **Universidad Politécnica Salesiana (UPS)**.
+
+Todos los derechos reservados conforme a las normativas de desarrollo académico e institucional. Prohibida su reproducción o explotación comercial sin autorización expresa.
