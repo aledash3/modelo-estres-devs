@@ -10,7 +10,7 @@
 
 ## 📌 Descripción General
 
-Este repositorio contiene el desarrollo completo del proyecto de investigación y modelado estadístico **"Modelado Estadístico del Nivel de Estrés en Desarrolladores de Software a partir de Métricas de Productividad y Carga Cognitiva"**, elaborado para la asignatura de **Modelos Estocásticos y Estadística Inferencial** de la **Universidad Politécnica Salesiana** (Quito, Ecuador).
+Este repositorio contiene el desarrollo completo del proyecto de investigación y modelado estadístico **"Modelado Estadístico del Nivel de Estrés en Desarrolladores de Software a partir de Métricas de Productividad y Carga Cognitiva"**, elaborado para la asignatura de **Análisis Multivariado y Modelos Estocásticos** (6to Semestre) de la **Universidad Politécnica Salesiana** (Quito, Ecuador).
 
 El objetivo central consiste en identificar qué variables cuantitativas de productividad, desempeño y demanda mental explican de manera estadísticamente significativa el nivel de estrés autopercibido por ingenieros de software asistidos por herramientas de inteligencia artificial.
 
@@ -198,7 +198,8 @@ Este proyecto fue desarrollado de forma colaborativa por:
 * **Carlos José Pilatuña Roldan** — [@Katsuro03](https://github.com/Katsuro03)
 * **Mario Alexander Salazar Serna** — [@mario-alexander-salazar](https://github.com/mario-alexander-salazar)
 
-Carrera de Ciencias de la Computación — Facultad de Ingeniería  
+Carrera de Ingeniería en Ciencias de la Computación — Facultad de Ingeniería  
+Asignatura: **Análisis Multivariado y Modelos Estocásticos** (6to Semestre)  
 **Universidad Politécnica Salesiana (UPS)**  
 Sede Quito, Ecuador
 
